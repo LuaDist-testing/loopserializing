@@ -1,0 +1,47 @@
+<p>The LOOP package provides a library of classes implemented using its models.
+All classes included in its library were created or derived from actual implementations used in either academic or commercial applications, and many are reused in more than one application.
+Therefore, even though the classes presented here are provided mainly as use examples of LOOP models they are very useful for construction of software applications.</p>
+
+<p>Most of these classes were initially created as Lua conventional modules and were later converted to classes so it is straightforward to convert them back to modules that don't lay on LOOP.
+Some of these classes can even be used as an instance of itself thus avoiding the creation of singleton objects.
+However, in some scenarios, it is interesting to be able to have multiple instances.
+The LOOP Class Library is organized in six groups as presented below.</p>
+
+<h2><a name="serial">Serialization</a></h2>
+
+<p>This group contains classes that implement a flexible mechanism that serializes almost any value into a Lua code that can be concatenated with other chunks of code to produce complex automatic generated scripts.
+However, the serialization mechanism provided by these class face a strong limitation imposed by current implementation of Lua that does not provide means to restore function upvalues properly.</p>
+
+<dl>
+
+<dt><a href="serial/Serializer.html">Value Serializer</a></dt>
+<dd>
+	<p>Class of objects that serialize values by creating a chunk of Lua code that when executed creates an isomorphic image of the serialized value, <i>i.e.</i> an identical copy of the original value, that may include self-referecing tables and functions.
+	However there are some limitations, specifically related to function upvalues.
+	It is also possible to define custom serialization for <code>userdata</code>.
+	This class is useful to implement persistence mechanisms or remote communication infrastructure.</p>
+</dd>
+
+<dt><a href="serial/StringStream.html">String Stream</a></dt>
+<dd>
+	<p>Subclass of <code><a href="serial/Serializer.html">Serializer</a></code> that serializes values into a string.
+	It is also used to restore values serialized in a string using the serialization mechanism provided by <code><a href="serial/Serializer.html">Serializer</a></code>.
+	This class is useful to pack values into strings that can be stored in run-time memory or other sort of storage.</p>
+</dd>
+
+<dt><a href="serial/FileStream.html">File Stream</a></dt>
+<dd>
+	<p>Subclass of <code><a href="serial/Serializer.html">Serializer</a></code> that serializes values into a file.
+	It is also used to restore values serialized in a file using the serialization mechanism provided by <code><a href="serial/Serializer.html">Serializer</a></code>.
+	This class is useful to implement persitence mechanisms.</p>
+</dd>
+
+<dt><a href="serial/SocketStream.html">Socket Stream</a></dt>
+<dd>
+	<p>Subclass of <code><a href="serial/Serializer.html">Serializer</a></code> that serializes values into a socket object like the ones provided by the <a href="http://www.tecgraf.puc-rio.br/luasocket">LuaSocket</a> library.
+	It is also used to restore values serialized using the serialization mechanism provided by <code><a href="serial/Serializer.html">Serializer</a></code> that are transmitted by a socket.
+	This class is useful to implement communication infrastructures.</p>
+</dd>
+
+</dl>
+
